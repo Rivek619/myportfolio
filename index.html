@@ -37,7 +37,9 @@
                     
                     {/* Profile Section */}
                     <div className="mt-80">
-                        <img src="profile.jpg" alt="Profile" className="rounded-full w-40 h-40 mx-auto shadow-lg" />
+                       <img src="profile.jpg" alt="Profile" 
+     className="rounded-full w-40 h-40 mx-auto shadow-lg border-4 border-blue-350" />
+
                         <h1 className="text-4xl font-semibold mt-3">Rivek Raj Tamang</h1>
                         <h2 className="text-2xl font-medium text-blue-400 mt-1">{titles[index]}</h2>
                     </div>
@@ -46,7 +48,7 @@
                     <section className="mt-10">
                         <h3 className="text-2xl font-semibold mb-4">Skills</h3>
                         <div className="grid grid-cols-3 gap-4">
-                            {["Penetration Testing", "Security Research", "Bug Bounty", "Linux", "VAPT", "Web Security"].map((skill, i) => (
+                            {["Cybersecurity", "Security Research", "Bug Bounty", "Linux", "Penetration Testing", "Web Security"].map((skill, i) => (
                                 <div key={i} className="bg-gray-800 text-lg p-4 rounded-md shadow-md">
                                     {skill}
                                 </div>
