@@ -9,16 +9,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.15/babel.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
-<body class="bg-gray-900 text-white flex items-center justify-center h-screen p-0">
+<body class="bg-gray-900 text-white flex justify-center p-0 overflow-auto">
 
-    <!-- Root div where React will be rendered -->
     <div id="root"></div>
 
     <script type="text/babel">
         function Portfolio() {
             const titles = ["Ethical Hacker", "Bug Hunter", "Security Researcher", "Penetration Tester"];
             const [index, setIndex] = React.useState(0);
-            const [activeButton, setActiveButton] = React.useState(null);
+            const [menuOpen, setMenuOpen] = React.useState(false); // State for mobile menu
 
             React.useEffect(() => {
                 const interval = setInterval(() => {
@@ -27,64 +26,94 @@
                 return () => clearInterval(interval);
             }, []);
 
-            const handleClick = (i) => {
-                setActiveButton(i); // Set active button immediately
-                setTimeout(() => setActiveButton(null), 500); // Reset after 500ms
-            };
-
             return (
-                <div className="bg-gray-900 text-white max-w-4xl w-full p-12 rounded-lg shadow-lg text-center transition-all duration-500">
-                    
-                    {/* Profile Section */}
-                    <div className="mt-80">
-                       <img src="profile.jpg" alt="Profile" 
-     className="rounded-full w-40 h-40 mx-auto shadow-lg border-4 border-blue-350" />
+                <div className="bg-gray-900 text-white w-full max-w-5xl p-8 md:p-12 rounded-lg shadow-lg text-center relative">
 
+                    {/* Navbar */}
+                    <nav className="fixed top-0 left-0 w-full bg-gray-900 shadow-md z-50">
+                        <div className="max-w-5xl mx-auto flex justify-between items-center p-5">
+                            <h1 className="text-xl font-bold">Rivek Raj Tamang</h1>
+                            <button className="md:hidden text-white focus:outline-none" onClick={() => setMenuOpen(!menuOpen)}>
+                                {menuOpen ? "✖" : "☰"}
+                            </button>
+                            <ul className={`md:flex md:space-x-6 text-lg ${menuOpen ? "block" : "hidden"} absolute md:relative top-full left-0 w-full md:w-auto bg-gray-900 md:bg-transparent text-center md:flex-row`}>
+                                <li className="py-2 md:py-0 hover:text-blue-400"><a href="index.html">Home</a></li>
+                                <li className="py-2 md:py-0 hover:text-blue-400"><a href="https://rivudon.medium.com/" target="_blank" rel="noopener noreferrer">Blog</a></li>
+                                <li className="py-2 md:py-0 hover:text-blue-400"><a href="https://rivudon.medium.com/" target="_blank" rel="noopener noreferrer">Bug Bounty</a></li>
+                                <li className="py-2 md:py-0 hover:text-blue-400"><a href="#about">About Me</a></li>
+                                <li className="py-2 md:py-0 hover:text-blue-400"><a href="#contact">Contact</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    {/* Profile Section */}
+                    <div className="flex flex-col items-center mt-20">
+                        <img 
+                            src="profile.jpg" 
+                            alt="Profile" 
+                            className="rounded-full w-40 h-40 shadow-lg border-4 border-blue-400"
+                        />
                         <h1 className="text-4xl font-semibold mt-3">Rivek Raj Tamang</h1>
                         <h2 className="text-2xl font-medium text-blue-400 mt-1">{titles[index]}</h2>
                     </div>
 
+                    {/* About Me */}
+                    <section id="about" className="mt-10">
+                        <h3 className="text-2xl font-semibold mb-4">About Me</h3>
+                        <div className="bg-gray-800 p-6 rounded-md shadow-md text-lg">
+                           <p>
+                                I am a passionate <span className="text-blue-400">Security Researcher</span> and <span className="text-blue-400">Bug Hunter</span>. 
+                                I specialize in finding vulnerabilities and bug, securing web applications, and helping organizations stay protected against cyber threats. 
+                                With expertise in <span className="text-blue-400">Bug Bounty</span> and <span className="text-blue-400">Cybersecurity</span>, 
+                                I am dedicated to improving digital security and <span className="text-green-400">Hack the World (Ethically)!</span>
+                            </p>
+                        </div>
+                    </section>
+
+                    {/* Work Section */}
+                    <section className="mt-10">
+                        <h3 className="text-2xl font-semibold mb-4">My Work</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {[
+                                { title: "Bug Bounty Journey", desc: "Bounties, Hall of Fames, Appreciation Letters, Swags, and Thanks.", url: "https://rivudon.medium.com/" },
+                                { title: "Blog and Writeups", desc: "Info-Sec Writeups, Bug Bounty Writeups, and more", url: "https://rivudon.medium.com/" }
+                            ].map((project, i) => (
+                                <a 
+                                    key={i} 
+                                    href={project.url} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="p-6 rounded-md shadow-md text-lg cursor-pointer transition-all duration-300 transform bg-gray-700 hover:scale-105 hover:bg-gray-600"
+                                >
+                                    <h4 className="font-semibold">{project.title}</h4>
+                                    <p className="mt-2">{project.desc}</p>
+                                </a>
+                            ))}
+                        </div>
+                    </section>
+
                     {/* Skills Section */}
                     <section className="mt-10">
                         <h3 className="text-2xl font-semibold mb-4">Skills</h3>
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                             {["Cybersecurity", "Security Research", "Bug Bounty", "Linux", "Penetration Testing", "Web Security"].map((skill, i) => (
-                                <div key={i} className="bg-gray-800 text-lg p-4 rounded-md shadow-md">
+                                <div 
+                                    key={i} 
+                                    className="bg-gray-800 text-lg p-4 rounded-md shadow-md transition-all duration-300 transform hover:scale-110 hover:bg-blue-500 hover:text-white"
+                                >
                                     {skill}
                                 </div>
                             ))}
                         </div>
                     </section>
 
-                    {/* My Work */}
-                    <section className="mt-10">
-                        <h3 className="text-2xl font-semibold mb-4">My Work</h3>
-                        <div className="grid grid-cols-2 gap-6">
-                            {[
-                                { title: "Hall of Fames", desc: "Recognitions for securing organisations." },
-                                { title: "Appreciation Letters", desc: "Appreciation/Recognition letters received" }
-                            ].map((project, i) => (
-                                <div 
-                                    key={i} 
-                                    className={`p-6 rounded-md shadow-md text-lg cursor-pointer transition-all duration-300 transform
-                                        ${activeButton === i ? "bg-blue-500 scale-110" : "bg-gray-700"}
-                                        hover:scale-105 hover:bg-gray-600`}
-                                    onClick={() => handleClick(i)}
-                                >
-                                    <h4 className="font-semibold">{project.title}</h4>
-                                    <p className="mt-2">{project.desc}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-
                     {/* Contact Section */}
-                    <section className="mt-10">
-                        <h3 className="text-2xl font-semibold mb-4">Contact</h3>
-                        <div className="flex justify-center space-x-10">
-                            <a href="https://linkedin.com/in/rivektamang" className="text-lg text-blue-400 hover:text-blue-600">🔗 LinkedIn</a>
-                            <a href="mailto:cybersecrivek@gmail.com" className="text-lg text-red-400 hover:text-red-600">📧 Email</a>
-                            <a href="https://github.com/" className="text-lg text-gray-300 hover:text-white">🐱 GitHub</a>
+                    <section id="contact" className="mt-10">
+                        <h3 className="text-2xl font-semibold mb-4">Contact Me</h3>
+                        <div className="flex flex-wrap justify-center gap-6">
+                            <a href="https://linkedin.com/in/rivektamang" className="px-6 py-3 bg-gray-600 hover:bg-gray-900 text-white rounded-md shadow-md transition">🔗 LinkedIn</a>
+                            <a href="mailto:cybersecrivek@gmail.com" className="px-6 py-3 bg-gray-600 hover:bg-gray-900 text-white rounded-md shadow-md transition">📧 Email</a>
+                            <a href="https://github.com/Rivek619" className="px-6 py-3 bg-gray-600 hover:bg-gray-900 text-white rounded-md shadow-md transition">🐱 GitHub</a>
                         </div>
                     </section>
                 </div>
