@@ -17,7 +17,7 @@
         function Portfolio() {
             const titles = ["Ethical Hacker", "Bug Hunter", "Security Researcher", "Penetration Tester"];
             const [index, setIndex] = React.useState(0);
-            const [menuOpen, setMenuOpen] = React.useState(false); // State for mobile menu navbar
+            const [menuOpen, setMenuOpen] = React.useState(false); // State for mobile menu
 
             React.useEffect(() => {
                 const interval = setInterval(() => {
@@ -83,7 +83,7 @@
                                     href={project.url} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="p-6 rounded-md shadow-md text-lg cursor-pointer transition-all duration-300 transform bg-gray-700 hover:scale-105 hover:bg-gray-600"
+                                    className="p-6 rounded-md shadow-md text-lg cursor-pointer transition-all duration-300 transform bg-gray-700 hover:scale-105 hover:bg-gray-500"
                                 >
                                     <h4 className="font-semibold">{project.title}</h4>
                                     <p className="mt-2">{project.desc}</p>
@@ -111,9 +111,9 @@
                     <section id="contact" className="mt-10">
                         <h3 className="text-2xl font-semibold mb-4">Contact Me</h3>
                         <div className="flex flex-wrap justify-center gap-6">
-                            <a href="https://linkedin.com/in/rivektamang" className="px-6 py-3 bg-gray-600 hover:bg-gray-900 text-white rounded-md shadow-md transition">🔗 LinkedIn</a>
-                            <a href="mailto:cybersecrivek@gmail.com" className="px-6 py-3 bg-gray-600 hover:bg-gray-900 text-white rounded-md shadow-md transition">📧 Email</a>
-                            <a href="https://github.com/Rivek619" className="px-6 py-3 bg-gray-600 hover:bg-gray-900 text-white rounded-md shadow-md transition">🐱 GitHub</a>
+                            <a href="https://linkedin.com/in/rivektamang" className="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-md shadow-md transition">🔗 LinkedIn</a>
+                            <a href="mailto:cybersecrivek@gmail.com" className="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-md shadow-md transition">📧 Email</a>
+                            <a href="https://github.com/Rivek619" className="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-md shadow-md transition">🐱 GitHub</a>
                         </div>
                     </section>
                 </div>
